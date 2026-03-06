@@ -21,6 +21,8 @@ permissions:
 jobs:
   run-inventory-agent:
     runs-on: ubuntu-latest
+    env:
+        ENV: ${{ secrets.ENV }}
 
     steps:
       - name: Checkout repository
@@ -46,6 +48,17 @@ jobs:
       - name: Write .env file
         run: |
           echo "${{ secrets.ENV }}" > src/.env
+
+      - name: Export multi-line ENV secrets
+        run: |
+          echo "$ENV" > .env
+          set -a
+          source .env
+          set +a
+          # Now all variables from ENV are available as environment variables
+          
+      - name: Print COSMOS_ENDPOINT
+        run: echo $COSMOS_ENDPOINT
 
       - name: Run Inventory Agent Initializer
         working-directory: src
