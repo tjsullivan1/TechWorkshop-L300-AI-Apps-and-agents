@@ -48,17 +48,6 @@ jobs:
         run: |
           echo "${{ secrets.ENV }}" > src/.env
 
-      - name: Export multi-line ENV secrets
-        run: |
-          echo "$ENV" > .env
-          set -a
-          source .env
-          set +a
-          # Now all variables from ENV are available as environment variables
-
-      - name: Print COSMOS_ENDPOINT
-        run: echo $COSMOS_ENDPOINT
-
       - name: Run Cart Manager Agent Initializer
         run: |
           cd src/
