@@ -7,6 +7,8 @@ on:
       - 'src/app/agents/customerLoyaltyAgent_initializer.py'
       - 'src/prompts/CustomerLoyaltyAgentPrompt.txt'
       - 'src/app/tools/discountLogic.py'
+      - '.github/workflows/run-customer-loyalty-agent.yml'
+
   pull_request:
     branches: [main]
     paths:
@@ -48,18 +50,8 @@ jobs:
       - name: Write .env file
         run: |
           echo "${{ secrets.ENV }}" > src/.env
-      - name: Export multi-line ENV secrets
-        run: |
-          echo "$ENV" > .env
-          set -a
-          source .env
-          set +a
-          # Now all variables from ENV are available as environment variables
-          
-      - name: Print COSMOS_ENDPOINT
-        run: echo $COSMOS_ENDPOINT
 
       - name: Run Customer Loyalty Agent Initializer
-        working-directory: src
         run: |
-          python -m app.agents.customerLoyaltyAgent_initializer
+          cd src/
+          python app/agents/customerLoyaltyAgent_initializer.py

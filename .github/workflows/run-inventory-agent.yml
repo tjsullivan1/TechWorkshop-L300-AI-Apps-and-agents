@@ -7,6 +7,7 @@ on:
       - 'src/app/agents/inventoryAgent_initializer.py'
       - 'src/prompts/InventoryAgentPrompt.txt'
       - 'src/app/tools/inventoryCheck.py'
+      - '.github/workflows/run-inventory-agent.yml'
   pull_request:
     branches: [main]
     paths:
@@ -61,6 +62,6 @@ jobs:
         run: echo $COSMOS_ENDPOINT
 
       - name: Run Inventory Agent Initializer
-        working-directory: src
         run: |
-          python -m app.agents.inventoryAgent_initializer
+          cd src/
+          python app/agents/inventoryAgent_initializer.py
