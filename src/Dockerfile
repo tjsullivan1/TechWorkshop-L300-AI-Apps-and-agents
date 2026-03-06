@@ -18,11 +18,8 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 
-# Copy the rest of the code
+# Copy the rest of the code (includes .env created by CI)
 COPY . .
-
-# Copy .env file into the image (for python-dotenv)
-COPY .env .env
 
 # Expose the port (default FastAPI/uvicorn port)
 EXPOSE 8000
