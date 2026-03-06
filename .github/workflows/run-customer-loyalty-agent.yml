@@ -34,7 +34,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r src/requirements.txt
 
-      - name: Login via Azure CLI
+     - name: Login via Azure CLI
         uses: azure/login@v2.1.1
         with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}
